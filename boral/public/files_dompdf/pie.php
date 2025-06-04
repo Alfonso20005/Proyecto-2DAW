@@ -1,0 +1,1 @@
+<tr class="pie"><td class="contenedor"><h3>&copy; 1998 - <?php echo date('Y'); ?> Boral Pastelería. Todos los derechos reservados.</h3></td></tr> 

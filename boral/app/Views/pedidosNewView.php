@@ -1,0 +1,77 @@
+<?php include("templates/parte1.php");?>
+<title>Boral | Pedidos New</title>
+<div class="row">
+    
+    <div class="col-12 d-flex justify-content-between align-items-center">
+        <h1 class="text-primary font-weight-bold">CREAR PEDIDOS</h1>
+
+        <!-- Botón Volver -->
+        <a href="<?php echo baseUrl();?>/pedidos/volver" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i>&nbsp; Volver</a>
+    </div>
+    
+    <div class="col-12">
+        <?php validation_list_errors(); 
+        $errors = validation_errors();
+        ?>
+
+        <form action="<?php echo baseUrl();?>/pedidos/crear" method="post" enctype="multipart/form-data" id="form1">
+            
+            <div class="mb-3">
+                <label for="id_usuario" class="form-label">Usuario</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend <?php echo isset($errors["id_usuario"]) ? 'is-invalid border border-danger' : ''; ?>">
+                            <span class="input-group-text"><i class="fa fa-user"></i></span>
+                        </div>
+                         <?php echo form_dropdown('id_usuario',$optionsUsuarios,set_value('id_usuario'),'class="' . (isset($errors["id_usuario"]) ? 'form-control is-invalid border border-danger' : 'form-control select2') . '" id="id_usuario" ');?>
+                    </div>
+                    <?php
+                    if(isset($errors["id_usuario"])) echo validation_show_error('id_usuario');  
+                    ?> 
+                
+            </div>
+            
+        <div class="row">
+            <div class="mb-3  col-md-6">
+                <label for="fecha_pedido" class="form-label">Fecha de Pedido</label>
+                <div class="input-group">
+                    <div class="input-group-prepend <?php echo isset($errors["fecha_pedido"]) ? 'is-invalid border border-danger' : ''; ?>">
+                        <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                    </div>
+                    <input type="date" class="form-control <?php echo isset($errors["fecha_pedido"]) ? 'is-invalid' : ''; ?>" id="fecha_pedido" name="fecha_pedido" value="<?php echo isset($fecha_pedido) ? $fecha_pedido : date('Y-m-d'); ?>">
+                </div>
+                 <?php
+                    if(isset($errors["fecha_pedido"])) echo validation_show_error('fecha_pedido');  
+                    ?> 
+            </div>
+
+            
+           <div class="mb-3 col-md-6">
+                <label for="estado" class="form-label">Estado</label>
+
+                <div class="input-group">
+                    <div class="input-group-prepend <?php echo isset($errors["estado"]) ? 'is-invalid border border-danger' : ''; ?>">
+                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                    </div>
+                    <select id="estado" name="estado" class="form-control <?php echo isset($errors["estado"]) ? 'is-invalid' : ''; ?>">
+                        <option value="pendiente" <?php echo (isset($estado) && $estado == 'pendiente') ? 'selected' : ''; ?>>Pendiente</option>
+                        <option value="enviado" <?php echo (isset($estado) && $estado == 'enviado') ? 'selected' : ''; ?>>Enviado</option>
+                        <option value="entregado" <?php echo (isset($estado) && $estado == 'entregado') ? 'selected' : ''; ?>>Entregado</option>
+                        <option value="cancelado" <?php echo (isset($estado) && $estado == 'cancelado') ? 'selected' : ''; ?>>Cancelado</option>
+                    </select>
+                </div>
+            </div> 
+            
+        </div>
+
+            <!-- Botón de envío -->
+            <div class="mb-3"> 
+                <button type="submit" class="btn btn-primary w-100" id="btnform11">Aceptar</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<?php include("templates/parte2.php");?>
+
+
